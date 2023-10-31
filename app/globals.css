@@ -5,3 +5,10 @@
 
 body {
 }
+
+button {
+    position: relative;
+}
+button:active {
+    top: 1px;
+}
