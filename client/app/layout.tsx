@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import ReduxProvider from './redux/provider'
 // import HeaderComp from '@components/Header/HeaderComp'
-import HeaderComp from './components/Header/HeaderComp'
+import HeaderComp from './components/Header/Header'
 
 import { Inter, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
