@@ -12,7 +12,9 @@ export default function LoggedInCard() {
     return (
         <div className="flex space-x-5 items-center">
             <div className="">
-                <button className="bg-black text-white p-3 px-6 rounded-full">Create new post</button>
+                <Link href="/create-prompt">
+                    <button className="bg-black text-white p-3 px-6 rounded-full">Create new post</button>
+                </Link>
             </div>
             <div className="">
                 <Link href="/logout">

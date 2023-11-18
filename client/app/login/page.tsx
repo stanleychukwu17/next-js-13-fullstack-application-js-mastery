@@ -1,17 +1,15 @@
 "use client"
 import axios from 'axios';
-import {useEffect, useLayoutEffect, useState} from "react";
+import {useState} from "react";
 import {useForm, SubmitHandler} from "react-hook-form"
 import { useRouter } from 'next/navigation';
-import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { useAppDispatch } from "../redux/hook";
 import { updateUser } from '../redux/features/userSlice';
 import { BACKEND_PORT as backEndPort } from '@/my.config';
 
 import MessageComp, {MessageCompProps} from "../components/Message/MessageComp";
 
 import './page.scss'
-
-
 
 
 type LoginForRHF = {
@@ -41,6 +39,8 @@ export default function LoginPage() {
     const { register: registerReg, handleSubmit: handleRegisterSubmit, setValue: regSetValue, formState: {errors:regError} } = useForm<RegisterRHF>()
 
     const submitLogin: SubmitHandler<LoginForRHF> = (data) => {
+        setIsLoading1(true)
+
         axios.post(`${backEndPort}/users/login`, data, {headers: {'Content-Type': 'application/json'}})
         .then((res) => {
             if(res.data.msg === 'okay') {

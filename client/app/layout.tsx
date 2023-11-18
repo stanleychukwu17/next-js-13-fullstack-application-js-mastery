@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body>
                 <ReduxProvider>
                     <HeaderComp />
-                    <main>
+                    <main className='padding-x'>
                         {children}
                     </main>
                 </ReduxProvider>
