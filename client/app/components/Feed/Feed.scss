@@ -1,0 +1,12 @@
+.FeedMCvr {
+    text-align: left;
+
+    .promptCard {
+        min-width: 32% !important;
+        margin: 10px 0;
+    
+        &:nth-child(3n+2) {
+            margin: 10px 2%;
+        }
+    }
+}
