@@ -1,8 +1,9 @@
 import { Express, Request, Response, NextFunction } from "express";
-import {register_a_new_user, login_this_user, logout_this_user} from './controllers/users.controller'
 import {log, errorLogger} from './logger/'
 import {show_bad_message, show_good_message } from "./functions/utils";
 import { requireUser } from "./middleware/requireUser";
+import {register_a_new_user, login_this_user, logout_this_user} from './controllers/users.controller'
+import { create_a_new_prompt } from "./controllers/prompts.controller";
 
 const routes = (app: Express) => {
     // checks to see if our servers are running as they should
@@ -52,9 +53,7 @@ const routes = (app: Express) => {
     //--START-- routes for prompts
     // this route creates a new prompt
     app.post('/prompts/new', async (req: Request, res: Response) => {
-
-        // const dts = await register_a_new_user(req.body)
-        console.log(req.body)
+        const dts = await create_a_new_prompt(req.body)
         res.json(req.body)
     })
     //--END--
