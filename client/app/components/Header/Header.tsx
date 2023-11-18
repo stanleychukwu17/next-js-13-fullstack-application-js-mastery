@@ -17,7 +17,7 @@ export default function HeaderComp() {
     const route = useRouter()
 
     return (
-        <div className="flex justify-between items-center p-5">
+        <header className="flex justify-between items-center p-5">
             <div className="font-bold text-lg">
                 <Link href='/'>Prompting</Link>
             </div>
@@ -25,6 +25,6 @@ export default function HeaderComp() {
                 {userInfo.loggedIn === 'no' && <LoggedOutCard />}
                 {userInfo.loggedIn === 'yes' && <LoggedInCard />}
             </div>
-        </div>
+        </header>
     )
 }

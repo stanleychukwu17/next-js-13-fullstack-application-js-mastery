@@ -3,11 +3,9 @@ import ReduxProvider from './redux/provider'
 // import HeaderComp from '@components/Header/HeaderComp'
 import HeaderComp from './components/Header/Header'
 
-import { Inter, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
 
 
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
     title: 'Prompting',
@@ -17,12 +15,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body>
                 <ReduxProvider>
                     <HeaderComp />
-                    <div className="mainChild">
+                    <main>
                         {children}
-                    </div>
+                    </main>
                 </ReduxProvider>
             </body>
         </html>
