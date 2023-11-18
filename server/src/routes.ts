@@ -5,6 +5,10 @@ import { requireUser } from "./middleware/requireUser";
 import {register_a_new_user, login_this_user, logout_this_user} from './controllers/users.controller'
 import { create_a_new_prompt } from "./controllers/prompts.controller";
 
+interface CustomRequest extends Request {
+    loggedInDts: {}; // Replace YourType with the actual type of loggedInDts
+}
+
 const routes = (app: Express) => {
     // checks to see if our servers are running as they should
     app.get('/healthCheck', (req, res) => {
@@ -54,7 +58,7 @@ const routes = (app: Express) => {
     // this route creates a new prompt
     app.post('/prompts/new', async (req: Request, res: Response) => {
         const dts = await create_a_new_prompt(req.body)
-        res.json(req.body)
+        res.json(dts)
     })
     //--END--
 }
