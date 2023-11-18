@@ -28,6 +28,7 @@ const routes = (app: Express) => {
     })
 
     //--START-- routes for users
+    //#region users
     // this route registers a new user
     app.post('/users/new_user', async (req: Request, res: Response) => {
         const dts = await register_a_new_user(req.body)
@@ -37,7 +38,6 @@ const routes = (app: Express) => {
     // this route logsIn a new user
     app.post('/users/login', async (req: Request, res: Response) => {
         const dts = await login_this_user(req.body)
-        console.log('what happened', dts)
         res.json(dts)
     })
 
@@ -45,6 +45,17 @@ const routes = (app: Express) => {
     app.post('/users/logout', async (req: Request, res: Response) => {
         const dts = await logout_this_user(req.body)
         res.json(dts)
+    })
+    //#endregion
+    //--END--
+
+    //--START-- routes for prompts
+    // this route creates a new prompt
+    app.post('/prompts/new', async (req: Request, res: Response) => {
+
+        // const dts = await register_a_new_user(req.body)
+        console.log(req.body)
+        res.json(req.body)
     })
     //--END--
 }
