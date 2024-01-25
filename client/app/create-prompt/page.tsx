@@ -8,6 +8,7 @@ import axios from 'axios';
 import {useForm, SubmitHandler} from "react-hook-form"
 import { BACKEND_PORT as backEndPort } from '@/my.config';
 import { useAppSelector } from "../redux/hook";
+import MessageComp, {MessageCompProps} from "../components/Message/MessageComp";
 
 
 // export const metadata: Metadata = {
@@ -23,42 +24,44 @@ type PromptForRHF = {
 export default function CreatePrompt() {
     const [isLoading1, setIsLoading1] = useState<boolean>(false) // used for login
     const userInfo = useAppSelector(state => state.user)
+    const [showAlert, setShowAlert] = useState<boolean>(false) // for showing of error messages from the backend
+    const [alertMsg, setAlertMsg] = useState<MessageCompProps>({msg_type:'', msg_dts:''}) // the error message
 
     // setting up React Hook Form to handle the forms below(i.e both the login and registration forms)
     const { register: registerForm, handleSubmit, setValue: formSetValue, formState: {errors:formError} } = useForm<PromptForRHF>()
 
     const submitForm: SubmitHandler<PromptForRHF> = (data) => {
         const toSend = {...userInfo, ...data}
-        // setIsLoading1(true)
+        setIsLoading1(true)
 
         axios.post(`${backEndPort}/prompts/new`, toSend, {headers: {'Content-Type': 'application/json'}})
         .then((res) => {
-            console.log(res.data)
-            return true
             if(res.data.msg === 'okay') {
                 // show successful message
-
-                // waits a little bit so that redux can finish it's thing and they i can redirect to the home page
+                setShowAlert(true)
+                setAlertMsg({'msg_type':res.data.msg, 'msg_dts':res.data.cause})
 
                 // clears all of the input field for login
                 Object.keys(data).forEach((item) => {
                     formSetValue(item as "prompt" | "tag", "") // RHF hook used here
                 })
             } else {
-                // setShowAlert(true)
-                // setAlertMsg({'msg_type':res.data.msg, 'msg_dts':res.data.cause})
+                setShowAlert(true)
+                setAlertMsg({'msg_type':res.data.msg, 'msg_dts':res.data.cause})
             }
             setIsLoading1(false)
         })
         .catch((err) => {
-            // setShowAlert(true)
-            // setAlertMsg({'msg_type':'bad', 'msg_dts':err.message+', please contact the customer support and report this issue'})
+            setShowAlert(true)
+            setAlertMsg({'msg_type':'bad', 'msg_dts':err.message+', please contact the customer support and report this issue'})
             setIsLoading1(false)
         });
     }
 
     return (
         <section>
+            {showAlert && <MessageComp {...alertMsg} closeAlert={setShowAlert} />}
+
             <div className="my-8">
                 <h2 className="text-4xl">Create a new post</h2>
                 <div className="max-w-xl mt-5">Create and share amazing prompt with the world, and let your imagination run wild with any AI powered platform</div>

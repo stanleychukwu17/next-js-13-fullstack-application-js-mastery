@@ -8,9 +8,7 @@ import { updateUser } from '../redux/features/userSlice';
 import { BACKEND_PORT as backEndPort } from '@/my.config';
 
 import MessageComp, {MessageCompProps} from "../components/Message/MessageComp";
-
 import './page.scss'
-
 
 type LoginForRHF = {
     username: string

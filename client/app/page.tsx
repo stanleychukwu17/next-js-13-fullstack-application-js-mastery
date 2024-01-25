@@ -1,5 +1,7 @@
 'use client'
 
+import Feed from "./components/Feed/Feed"
+
 export default function HomePage() {
     return (
         <main className="text-center">
@@ -16,6 +18,9 @@ export default function HomePage() {
                     className="bg-[#f1f2f6] w-2/4 px-5 py-5 rounded border-[#efeff0] focus:outline-[#bae4e5] focus:bg-[#eff5f7]"
                     type="text" placeholder="Search for a tag or a username"
                 />
+            </div>
+            <div className="">
+                <Feed /> 
             </div>
         </main>
     )
